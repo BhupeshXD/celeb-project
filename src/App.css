@@ -1,0 +1,156 @@
+/* Global styles */
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  padding-left: 420px;
+  padding-top: 20px;
+  font-size: 30px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.search-container {
+  margin-top: 20px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  padding: 12px;
+  width: 500px;
+}
+
+.search-icon {
+  padding-left: 10px;
+  margin-right: 8px;
+  font-size: 24px;
+}
+
+.search-bar input {
+  border: none;
+  flex: 1;
+  padding: 12px;
+  outline: none;
+  font-size: 18px;
+}
+
+/* List view styles */
+.item-container {
+  border: 1px solid lightgrey;
+  border-radius: 20px;
+  width: 500px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 10px;
+  padding: 10px;
+  transition: all 0.3s; 
+}
+
+.item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile-picture img {
+  max-width: 100px; 
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.name {
+  margin-right: 329px;
+}
+
+.details-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap:20px;
+  
+}
+
+.item-details {
+  margin-top: 10px;
+  text-align: center;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  height: 100px; 
+  width: 400px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.name-and-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-icon {
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.editdelete-icon {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  padding-left: 15px;
+  justify-content: flex-end;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.edit-icons {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  padding-left: 15px;
+  justify-content: flex-end;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+.item-container.edit-mode .editdelete {
+  background-color: transparent;
+}
+
+.item-container.edit-mode .edit-icons {
+  background-color: transparent;
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
