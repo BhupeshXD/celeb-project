@@ -1,20 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CelebJSON from "../db/celebrities.json";
 import SearchBar from "./SearchBar";
 import Item from "./Item";
 
 const List = () => {
   const [celebData, setCelebData] = useState([ ...CelebJSON ]);
-  // const [empty, setEmpty] = useState(false);
-  // console.log("CelebJSON", CelebJSON);
-
-  // useEffect(() => {
-  //   if (celebData.length === 0) {
-  //     setEmpty(true);
-  //   } else {
-  //     setEmpty(false);
-  //   }
-  // }, [celebData]);
   const searchHandler = (event) => {
     if (event.target.value) {
       setCelebData(
