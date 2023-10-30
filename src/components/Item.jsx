@@ -11,7 +11,6 @@ import ConfirmationModal from "./ConfirmationModal";
 const Item = ({ data, onDelete, onEdit }) => {
   const [open, setOpen] = useState(false);
   const bornYear = Moment(data.dob).year();
-  console.log('bornYear', bornYear)
   const currentYear = Moment().year();
   const [edit, setEdit] = useState(false);
   const [age, setAge] = useState(currentYear - bornYear);
