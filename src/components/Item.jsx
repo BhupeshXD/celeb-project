@@ -1,18 +1,17 @@
 import Moment from "moment";
 import { useState } from "react";
-import { SlPencil } from 'react-icons/sl';
-import { RiArrowDropDownLine } from 'react-icons/ri';
-import { RiArrowDropUpLine } from 'react-icons/ri';
-import { RiDeleteBin6Line } from 'react-icons/ri';
-import { LiaCheckSolid } from 'react-icons/lia';
-import { RxCross1 } from 'react-icons/rx';
+import { SlPencil } from "react-icons/sl";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { RiArrowDropUpLine } from "react-icons/ri";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { LiaCheckSolid } from "react-icons/lia";
+import { RxCross1 } from "react-icons/rx";
 import ConfirmationModal from "./ConfirmationModal";
 
-
 const Item = ({ data, onDelete, onEdit }) => {
-
   const [open, setOpen] = useState(false);
   const bornYear = Moment(data.dob).year();
+  console.log('bornYear', bornYear)
   const currentYear = Moment().year();
   const [edit, setEdit] = useState(false);
   const [age, setAge] = useState(currentYear - bornYear);
@@ -31,7 +30,7 @@ const Item = ({ data, onDelete, onEdit }) => {
   };
 
   const handleDelete = () => {
-    onDelete(data.id)
+    onDelete(data.id);
     hideModal();
   };
 
@@ -46,121 +45,185 @@ const Item = ({ data, onDelete, onEdit }) => {
       country: country,
       description: description,
     });
+    console.log('data', data)
   };
-
 
   return (
     <div className="item-container">
-      <div className="item-header">
+      <div
+        style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+      >
         <div className="profile-picture">
           <img src={data.picture} alt="img" />
         </div>
         {!edit && (
-          <p className="name">
-            {data.first}
-          </p>
+          <div style={{ width: "150px" }}>
+            <p style={{ fontSize: "25px", fontWeight: "600" }} className="name">
+              {data.first}
+            </p>
+          </div>
         )}
         {edit && (
           <input
+            style={{ height: "25px", width: "80px" }}
             placeholder="name"
             value={name}
             onChange={(e) => {
               setName(e.target.value);
             }}
-          />)}
+          />
+        )}
 
-        <div onClick={() => setOpen((prevVal) => !prevVal)}>
-          {open ? <RiArrowDropUpLine /> : <RiArrowDropDownLine />}
+        <div
+          onClick={() => setOpen((prevVal) => !prevVal)}
+          style={{ marginLeft: "auto" }}
+        >
+          {open ? (
+            <RiArrowDropUpLine style={{ fontSize: "40px" }} />
+          ) : (
+            <RiArrowDropDownLine style={{ fontSize: "40px" }} />
+          )}
         </div>
       </div>
 
       {open && (
         <>
           <div className="item-details">
-            {!edit && (
-              <div>
-                <div className="details-row">
-                  <div>Age : {age}</div>
-                  <div>Gender : {data.gender}</div>
-                  <div>Country {data.country}</div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <div style={{ textAlign: "left" }}>
+                  <div style={{ fontSize: "15px", fontWeight: 600 }}>Age</div>
+                  {!edit && <div>{age}</div>}
+                  {edit && (
+                    <input
+                      style={{ width: "80px" }}
+                      placeholder="Age"
+                      onChange={(e) => {
+                        setAge(e.target.value);
+                      }}
+                      value={age}
+                    />
+                  )}
                 </div>
-                <div>Description {data.description}</div>
+                <div style={{ textAlign: "left" }}>
+                  <div style={{ fontSize: "15px", fontWeight: 600 }}>
+                    Gender
+                  </div>
+                  {!edit && <div>{data.gender}</div>}
+                  {edit && (
+                    <select
+                      style={{ width: "80px" }}
+                      onChange={(e) => {
+                        setGender(e.target.value);
+                      }}
+                      value={gender}
+                    >
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="rather not say">Rather Not say</option>
+                      <option value="transgender">Transgender</option>
+                    </select>
+                  )}
+                </div>
+                <div style={{ textAlign: "left" }}>
+                  <div style={{ fontSize: "15px", fontWeight: 600 }}>
+                    Country
+                  </div>
+                  {!edit && <div>{data.country}</div>}
+                  {edit && (
+                    <input
+                      style={{ width: "80px" }}
+                      onChange={(e) => {
+                        setCountry(e.target.value);
+                      }}
+                      placeholder="Country"
+                      value={country}
+                    />
+                  )}
+                </div>
               </div>
-            )}
-            {edit && (
-              <div>
-                <div className="details-row">
-                  <input
-                    placeholder="Age"
-                    onChange={(e) => {
-                      setAge(e.target.value);
-                    }}
-                    value={age}
-                  />
-                  <input
-                    onChange={(e) => {
-                      setGender(e.target.value);
-                    }}
-                    placeholder="Gender"
-                    value={gender}
-                  />
-                  <input
-                    onChange={(e) => {
-                      setCountry(e.target.value);
-                    }}
-                    placeholder="Country"
-                    value={country}
-                  />
+              <div style={{ textAlign: "left", marginTop: "20px" }}>
+                <div style={{ fontSize: "15px", fontWeight: 600 }}>
+                  Description
                 </div>
-
-                <textarea
-                  onChange={(e) => {
-                    setDescription(e.target.value);
-                  }}
-                  placeholder="Description"
-                  name="description"
-                  rows="10"
-                  cols="30"
-                  defaultValue={description}
-                />
-              </div>
-            )}
-          </div>
-          {!edit && (
-            <>
-              <div className="editdelete-icon">
-                <div onClick={showModal} className="clickable-div">
-                  <RiDeleteBin6Line />
-                </div>
-                {isModalVisible && (
-                  <ConfirmationModal onCancel={hideModal} onDelete={handleDelete} />
+                {!edit && (
+                  <div style={{ textAlign: "left" }}>{data.description}</div>
                 )}
-              
-              <div
-                onClick={() => {
-                  onEdit(data.id);
-                  setEdit((prevVal) => !prevVal);
-                }}
-              >
-                <SlPencil />
-              </div>
-              </div>
-            </>
-          )}
-          {edit && (
-
-            <div className="edit-icons">
-              <div onClick={() => setEdit(false)}><RxCross1 /></div>
-              <div
-                onClick={() => {
-                  onSubmitHandler();
-                  setEdit(false);
-                }}
-              >
-                <LiaCheckSolid />
+                {edit && (
+                  <textarea
+                    onChange={(e) => {
+                      setDescription(e.target.value);
+                    }}
+                    style={{ width: "95%" }}
+                    placeholder="Description"
+                    name="description"
+                    rows="10"
+                    cols="30"
+                    defaultValue={description}
+                  />
+                )}
               </div>
             </div>
-          )}
+          </div>
+
+          <>
+            <div className="editdelete-icon">
+              {!edit && (
+                <>
+                  <div onClick={showModal} className="clickable-div">
+                    <RiDeleteBin6Line />
+                  </div>
+                  {isModalVisible && (
+                    <ConfirmationModal
+                      onCancel={hideModal}
+                      onDelete={handleDelete}
+                    />
+                  )}
+                </>
+              )}
+              {edit && (
+                <div onClick={() => setEdit(false)}>
+                  <RxCross1 />
+                </div>
+              )}
+              {!edit && (
+                <>
+                  <div
+                    onClick={() => {
+                      onEdit(data.id);
+                      setEdit((prevVal) => !prevVal);
+                    }}
+                  >
+                    <SlPencil />
+                  </div>
+                </>
+              )}
+              {edit && (
+                <div
+                  onClick={() => {
+                    onSubmitHandler();
+                    setEdit(false);
+                  }}
+                >
+                  <LiaCheckSolid />
+                </div>
+              )}
+            </div>
+          </>
+
+          {/* {edit && <div className="edit-icons"></div>} */}
         </>
       )}
     </div>

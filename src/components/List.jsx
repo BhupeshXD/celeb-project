@@ -4,18 +4,18 @@ import SearchBar from "./SearchBar";
 import Item from "./Item";
 
 const List = () => {
-  const [celebData, setCelebData] = useState(CelebJSON);
-  const [search, setSearch] = useState("");
-  const [empty, setEmpty] = useState(false);
+  const [celebData, setCelebData] = useState([ ...CelebJSON ]);
+  // const [empty, setEmpty] = useState(false);
+  // console.log("CelebJSON", CelebJSON);
 
-  useEffect(() => {
-    if (celebData.length === 0) {
-      //setEmpty(true)
-    }
-  }, [celebData]);
-
+  // useEffect(() => {
+  //   if (celebData.length === 0) {
+  //     setEmpty(true);
+  //   } else {
+  //     setEmpty(false);
+  //   }
+  // }, [celebData]);
   const searchHandler = (event) => {
-    setSearch(event.target.value);
     if (event.target.value) {
       setCelebData(
         CelebJSON.filter((i) =>
@@ -25,7 +25,7 @@ const List = () => {
     }
 
     if (event.target.value === "") {
-      setCelebData(CelebJSON);
+      setCelebData([...CelebJSON]);
     }
   };
 
@@ -33,8 +33,15 @@ const List = () => {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
+      <h1>List View</h1>
       <SearchBar onChange={searchHandler} />
-      {/* {empty && emptybox} */}
+      {celebData.length === 0 && (
+        <div
+          style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
+        >
+          No data found !
+        </div>
+      )}
       {celebData?.map((item) => (
         <Item
           key={item.id}
@@ -44,7 +51,7 @@ const List = () => {
           }}
           onEdit={(obj) => {
             setCelebData((prevVal) =>
-              prevVal.map((prevVal) => (prevVal.id === obj.id ? obj : prevVal))
+              prevVal.map((currentVal) => (currentVal.id === obj.id ? obj : currentVal))
             );
           }}
         />

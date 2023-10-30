@@ -1,6 +1,6 @@
-import React from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
-import '../App.css';
+import React from "react";
+import { AiOutlineSearch } from "react-icons/ai";
+import "../App.css";
 
 const SearchBar = ({ onChange }) => {
   return (
@@ -9,11 +9,7 @@ const SearchBar = ({ onChange }) => {
         <span className="search-icon">
           <AiOutlineSearch />
         </span>
-        <input
-          type="text"
-          placeholder="Search user"
-          onChange={onChange}
-        />
+        <input type="text" placeholder="Search user" onChange={onChange} />
       </div>
     </div>
   );
