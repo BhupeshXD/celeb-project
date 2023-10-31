@@ -44,7 +44,6 @@ const Item = ({ data, onDelete, onEdit }) => {
       country: country,
       description: description,
     });
-    console.log('data', data)
   };
 
   return (
