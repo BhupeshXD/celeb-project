@@ -4,7 +4,9 @@ import SearchBar from "./SearchBar";
 import Item from "./Item";
 
 const List = () => {
+  
   const [celebData, setCelebData] = useState([ ...CelebJSON ]);
+
   const searchHandler = (event) => {
     if (event.target.value) {
       setCelebData(

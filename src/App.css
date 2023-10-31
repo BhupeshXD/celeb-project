@@ -1,8 +1,4 @@
 /* Global styles */
-.App {
-  display: flex;
-  flex-direction: column;
-}
 
 .heading {
   padding-left: 420px;
@@ -56,7 +52,6 @@
 .item-header {
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
 }
 
 .profile-picture img {
@@ -70,12 +65,6 @@
   margin-right: 329px;
 }
 
-.details-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 20px;
-}
 
 .item-details {
   margin-top: 10px;
@@ -153,3 +142,4 @@ textarea {
   border-radius: 5px;
   text-align: center;
 }
+
