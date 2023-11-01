@@ -20,9 +20,11 @@ const Item = ({ data, onDelete, onEdit }) => {
   const [description, setDescription] = useState(data.description);
   const [isModalVisible, setModalVisible] = useState(false);
 
+  
   const showModal = () => {
     setModalVisible(true);
   };
+
 
   const hideModal = () => {
     setModalVisible(false);
@@ -33,17 +35,44 @@ const Item = ({ data, onDelete, onEdit }) => {
     hideModal();
   };
 
+  const handleCountryChange = (e) => {
+    const inputValue = e.target.value;
+    
+    if (/^[a-zA-Z]+$/.test(inputValue) || inputValue === "") {
+      setCountry(inputValue);
+    }
+  };
+    
+   
+  
   const onSubmitHandler = () => {
     const date = Moment(data.dob).date();
     const month = Moment(data.dob).month() + 1;
-    onEdit({
-      ...data,
-      first: name,
-      dob: `${age}-${month}-${date}`,
-      gender: gender,
-      country: country,
-      description: description,
-    });
+
+  
+    
+    
+
+  if (!name || !age || !gender || !country || !description) {
+      alert('Please fill in all the required fields.');
+      return;
+    }
+
+    const userAge = currentYear - bornYear;
+
+    if (userAge >= 18) {
+      // Only allow editing if the user is an adult
+      onEdit({
+        ...data,
+        first: name,
+        dob: `${age}-${month}-${date}`,
+        gender: gender,
+        country: country,
+        description: description,
+      });
+    } else {
+      alert('You can only edit users who are adults.');
+    }
   };
 
   return (
@@ -61,8 +90,10 @@ const Item = ({ data, onDelete, onEdit }) => {
             </p>
           </div>
         )}
+
         {edit && (
           <input
+            
             style={{ height: "25px", width: "80px" }}
             placeholder="name"
             value={name}
@@ -106,6 +137,8 @@ const Item = ({ data, onDelete, onEdit }) => {
                   {!edit && <div>{age}</div>}
                   {edit && (
                     <input
+                      
+                      type='number'
                       style={{ width: "80px" }}
                       placeholder="Age"
                       onChange={(e) => {
@@ -113,6 +146,7 @@ const Item = ({ data, onDelete, onEdit }) => {
                       }}
                       value={age}
                     />
+                    
                   )}
                 </div>
                 <div style={{ textAlign: "left" }}>
@@ -122,6 +156,7 @@ const Item = ({ data, onDelete, onEdit }) => {
                   {!edit && <div>{data.gender}</div>}
                   {edit && (
                     <select
+                     
                       style={{ width: "80px" }}
                       onChange={(e) => {
                         setGender(e.target.value);
@@ -142,10 +177,9 @@ const Item = ({ data, onDelete, onEdit }) => {
                   {!edit && <div>{data.country}</div>}
                   {edit && (
                     <input
+                    
                       style={{ width: "80px" }}
-                      onChange={(e) => {
-                        setCountry(e.target.value);
-                      }}
+                      onChange={handleCountryChange}
                       placeholder="Country"
                       value={country}
                     />
@@ -161,6 +195,7 @@ const Item = ({ data, onDelete, onEdit }) => {
                 )}
                 {edit && (
                   <textarea
+                  
                     onChange={(e) => {
                       setDescription(e.target.value);
                     }}

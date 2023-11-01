@@ -1,6 +1,9 @@
 import React from 'react';
 
 const ConfirmationModal = ({ onCancel, onDelete }) => {
+
+  
+
   return (
     <div className="modal">
       <div className="modal-content">

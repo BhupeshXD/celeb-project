@@ -6,7 +6,9 @@ import Item from "./Item";
 const List = () => {
   const [celebData, setCelebData] = useState(CelebJSON);
   const [empty, setEmpty] = useState(false);
-  // console.log("CelebJSON", CelebJSON);
+  
+  console.log("CelebJSON", CelebJSON);
+
   useEffect(() => {
     if (celebData.length === 0) {
       setEmpty(true);
@@ -18,8 +20,8 @@ const List = () => {
   const searchHandler = (event) => {
     if (event.target.value) {
       setCelebData(
-        CelebJSON.filter((i) =>
-          i.first.toLowerCase().includes(event.target.value.toLowerCase())
+        CelebJSON.filter((item) =>
+          item.first.toLowerCase().includes(event.target.value.toLowerCase())
         )
       );
     }
@@ -47,7 +49,7 @@ const List = () => {
           key={item.id}
           data={item}
           onDelete={(id) => {
-            setCelebData((prevVal) => prevVal.filter((i) => i.id !== id));
+            setCelebData((prevVal) => prevVal.filter((index) => index.id !== id));
           }}
           onEdit={(obj) => {
             setCelebData((prevVal) =>
