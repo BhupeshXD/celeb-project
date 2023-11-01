@@ -6,7 +6,7 @@ import Item from "./Item";
 const List = () => {
   const [celebData, setCelebData] = useState(CelebJSON);
   const [empty, setEmpty] = useState(false);
-  
+
   console.log("CelebJSON", CelebJSON);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const List = () => {
           key={item.id}
           data={item}
           onDelete={(id) => {
-            setCelebData((prevVal) => prevVal.filter((index) => index.id !== id));
+            setCelebData((prevVal) => prevVal.filter((item) => item.id !== id));
           }}
           onEdit={(obj) => {
             setCelebData((prevVal) =>
